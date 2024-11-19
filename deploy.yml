@@ -1,0 +1,15 @@
+---
+- hosts: app_servers
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+    - name: Copy website files
+      copy:
+        src: /path/to/website/    # This will be the directory containing index.html
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+        mode: '0644'
